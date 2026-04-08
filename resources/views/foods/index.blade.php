@@ -1,19 +1,34 @@
-<h2>Food Listings</h2>
+@extends('layouts.app')
+@section('title', 'Food Listings')
+@section('content')
 
-<a href="/foods/create">Add New Food</a>
+<h1 class="text-3xl font-bold mb-6">Available Foods</h1>
 
-@foreach($foods as $food)
-    <div style="border:1px solid black; margin:10px; padding:10px;">
-        <h3>{{ $food->title }}</h3>
-        <p>{{ $food->description }}</p>
-        <p>Price: {{ $food->price }}</p>
-
-        <a href="/foods/{{ $food->id }}/edit">Edit</a>
-
-        <form action="/foods/{{ $food->id }}" method="POST" style="display:inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit">Delete</button>
-        </form>
+<div class="flex flex-wrap justify-start -m-4">
+    @foreach($foods as $food)
+    <div class="max-w-sm rounded overflow-hidden shadow-lg m-4 bg-white">
+        <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">{{ $food->title }}</div>
+            <p class="text-gray-700 text-base">{{ $food->description }}</p>
+            <p class="mt-2 text-green-600 font-semibold">Price: ${{ $food->price }}</p>
+            <p class="text-gray-600">Quantity: {{ $food->quantity }}</p>
+            <p class="text-gray-600">Expiry: {{ $food->expiry_time }}</p>
+            <p class="text-gray-600">Cafeteria: {{ $food->cafeteria_name }}</p>
+        </div>
+        <div class="px-6 pt-4 pb-4 flex space-x-2">
+            <a href="{{ route('foods.edit', $food->id) }}"
+               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+            <form action="{{ route('foods.destroy', $food->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit"
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    Delete
+                </button>
+            </form>
+        </div>
     </div>
-@endforeach
+    @endforeach
+</div>
+
+@endsection
