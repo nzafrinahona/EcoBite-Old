@@ -20,3 +20,8 @@ Sprint 1 Features:
 - Delete food listing [Asif]
 - Active Listings Dashboard [Mahir]
 - Sort by Price [Rongona]
+sprint 5 features:
+- Student Review and rating[Asif]
+- Pickup Code Verification[Mahir]
+- "Mark Order Complete / No-show and
+Aggregate Rating Display[Rongona]
